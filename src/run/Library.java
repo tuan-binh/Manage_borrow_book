@@ -78,7 +78,6 @@ public class Library {
             menuUser();
          }
       }
-
    }
 
    public static void register() {
@@ -202,18 +201,21 @@ public class Library {
       calendar.add(Calendar.DATE, 7);
       // Ngày hết hạn
       Date dueDate = calendar.getTime();
+      //  Lấy thông tin sách
+      System.out.println("Nhập vào id sách bạn muốn thêm: ");
+      int id = Config.scanner().nextInt();
+      Book book = bookController.findById(id);
+      if(book == null) {
+         System.err.println("~~ Không có sách đấy ~~");
+         return;
+      }
       Cart cart = new Cart();
       cart.setId(cartController.getNewId());
-      System.out.print("Nhập tên sách: ");
-      cart.setBookName(Config.scanner().nextLine());
-      System.out.print("Nhập giá sách: ");
-      cart.setBookPrice(Config.scanner().nextDouble());
-      System.out.print("Nhập tên tác giả: ");
-      cart.setBookAuthor(Config.scanner().nextLine());
-      System.out.print("Nhập vào số lượng: ");
-      cart.setQuantity(Config.scanner().nextInt());
-      System.out.print("Nhập vào thể loại: ");
-      cart.setCategoryName(Config.scanner().nextLine());
+      cart.setBookName(book.getName());
+      cart.setBookPrice(book.getPrice());
+      cart.setBookAuthor(book.getAuthor());
+      cart.setQuantity(book.getQuantity());
+      cart.setCategoryName(book.getCategory().getName());
       cart.setBorrowDate(borrowDate);
       cart.setDueDate(dueDate);
       cartController.save(cart);
