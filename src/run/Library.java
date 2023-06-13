@@ -14,20 +14,15 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class Library {
-   private static UserController userController = new UserController();
-   private static CategoryController categoryController = new CategoryController();
-   private static BookController bookController = new BookController();
-   private static CartController cartController = new CartController();
+   private final static UserController userController = new UserController();
+   private final static CategoryController categoryController = new CategoryController();
+   private final static BookController bookController = new BookController();
+   private final static CartController cartController = new CartController();
 
    public static int idLogin;
 
    public static void main(String[] args) {
       int choose;
-//      listUser = userController.getAll();
-//      listCategory = categoryController.getAll();
-//      listBook = bookController.getAll();
-
-
       while (true) {
          System.out.println(">>================ LIBRARY ================<<");
          System.out.println("1. Đăng Nhập");
@@ -474,7 +469,6 @@ public class Library {
       int id = Config.scanner().nextInt();
       return categoryController.findById(id);
    }
-
 
    //   Quản lý danh mục
    public static void menuCategory() {
